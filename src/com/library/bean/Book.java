@@ -22,6 +22,11 @@ public class Book {
 	public String getAuthor() {
 		return author;
 	}
+	@Override
+	public String toString() {
+		return "Book [bookID=" + bookID + ", title=" + title + ", author=" + author + ", totalCopies=" + totalCopies
+				+ ", availableCopies=" + availableCopies + "]";
+	}
 	public void setAuthor(String author) {
 		this.author = author;
 	}

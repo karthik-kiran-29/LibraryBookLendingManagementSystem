@@ -18,7 +18,7 @@ public class BookDAO {
 	public Book findBook(String bookID) {
 		if(!bookID.isBlank()) {
 			try {
-				PreparedStatement ps = con.prepareStatement("Select * from book_tbl where BookId= ?");
+				PreparedStatement ps = con.prepareStatement("Select * from book_tbl where Book_id= ?");
 				
 				ps.setString(1, bookID);
 				
@@ -32,7 +32,9 @@ public class BookDAO {
 				book.setTitle(rs.getString("Title"));
 				book.setAuthor(rs.getString("Author"));
 				book.setTotalCopies(rs.getInt("Total_Copies"));
-				book.setTotalCopies(rs.getInt("Available_Copies"));
+				book.setAvailableCopies(rs.getInt("Available_Copies"));
+				
+				System.out.println(book.toString());
 				
 				return book;
 				
@@ -58,7 +60,7 @@ public class BookDAO {
 		while(rs.next()) {
 			Book book = new Book();
 			
-			book.setBookID(rs.getString("bookId"));
+			book.setBookID(rs.getString("book_Id"));
 			book.setTitle(rs.getString("Title"));
 			book.setAuthor(rs.getString("Author"));
 			book.setTotalCopies(rs.getInt("Total_Copies"));
@@ -107,7 +109,7 @@ public class BookDAO {
 	
 	public boolean updateAvailableCopies(String bookID,int newCount) {
 		try {
-			PreparedStatement ps = con.prepareStatement("UPDATE book_tbl SET Available_copies = ? WHERE bookID = ?");
+			PreparedStatement ps = con.prepareStatement("UPDATE book_tbl SET Available_copies = ? WHERE book_ID = ?");
 			
 			ps.setInt(1, newCount);
 			ps.setString(2, bookID);
@@ -125,7 +127,7 @@ public class BookDAO {
 	
 	public boolean deleteBook(String bookID) {
 		try {
-			PreparedStatement ps = con.prepareStatement("DELETE FROM book_tbl WHERE bookId= ?");
+			PreparedStatement ps = con.prepareStatement("DELETE FROM book_tbl WHERE book_Id= ?");
 			
 			ps.setString(0, bookID);
 			
